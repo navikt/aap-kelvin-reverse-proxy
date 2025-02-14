@@ -1,0 +1,30 @@
+{
+  "name": "aap-kelvin-reverse-proxy",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node dist/index.js",
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest --run"
+  },
+  "packageManager": "yarn@4.4.1",
+  "dependencies": {
+    "@navikt/oasis": "^3.6.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-http-proxy": "^2.1.1",
+    "pino": "^9.6.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/express-http-proxy": "^1.6.6",
+    "@types/node": "^22.13.1",
+    "eslint": "^9.19.0",
+    "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.23.0",
+    "vitest": "^3.0.5"
+  }
+}

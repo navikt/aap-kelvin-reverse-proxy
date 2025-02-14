@@ -1,0 +1,57 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "50M"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "90"
+  name: "kelvin-reverse-proxy"
+  namespace: "aap"
+  labels:
+    "team": "aap"
+spec:
+  image: {{image}}
+  port: 3000
+  liveness:
+    path: "/internal/isAlive"
+    initialDelay: 20
+    timeout: 60
+  readiness:
+    path: "/internal/isReady"
+    initialDelay: 20
+    timeout: 60
+  replicas:
+    min: 2
+    max: 4
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      memory: 512Mi
+  azure:
+    application:
+      enabled: true
+      allowAllUsers: true
+    sidecar:
+      enabled: true
+      autoLogin: true
+  observability:
+    tracing:
+      enabled: true
+  ingresses:
+  {{#each ingresses as |url|}}
+    - {{url}}
+  {{/each}}
+  env:
+  {{#each env}}
+    - name: {{this.name }}
+      value: {{this.value}}
+  {{/each}}
+  tokenx:
+    enabled: true
+  accessPolicy:
+    outbound:
+      rules:
+        - application: oppgavestyring-frontend
+      external:
+        - host: "cdn.nav.no"
