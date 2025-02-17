@@ -131,3 +131,7 @@ dist
 
 # Idea
 .idea
+
+#co authors
+.git-co-authors.yaml
+.husky/prepare-commit-msg
