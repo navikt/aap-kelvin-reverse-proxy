@@ -53,5 +53,8 @@ spec:
     outbound:
       rules:
         - application: oppgavestyring-frontend
+        - application: produksjonsstyring
+        - application: postmottak
+        - application: saksbehandling
       external:
         - host: "cdn.nav.no"
