@@ -15,26 +15,25 @@ export interface ProxyConfig {
 const apper: ProxyConfig[] = [
   {
     path: "/oppgavestyring-frontend",
-    scope: "api://dev-gcp.aap.oppgavestyring-frontend/.default",
+    scope: process.env.OPPGAVESTYRING_FRONTEND_SCOPE || '',
     url: "http://oppgavestyring-frontend",
 
   },
-  // {
-  //   path: "/oppgave",
-  //   scope: "api://dev-gcp.aap.produksjonsstyring/.default"
-  // },
-  // {
-  //   path: "/produksjonsstyring",
-  //   scope: "api://dev-gcp.aap.produksjonsstyring/.default"
-  // },
-  // {
-  //   path: "/saksbehandling",
-  //   scope: "api://dev-gcp.aap.saksbehandling/.default"
-  // },
-  // {
-  //   path: "/postmottak",
-  //   scope: "api://dev-gcp.aap.postmottak/.default"
-  // },
+  {
+    path: "/oppgave",
+    scope: process.env.PRODUKKSJONSSTYRING_SCOPE || '',
+    url: "http://produksjonsstyring",
+  },
+  {
+    path: "/saksbehandling",
+    scope: process.env.SAKSBEHANDLING_SCOPE || '',
+    url: "http://saksbehandling",
+  },
+  {
+    path: "/postmottak",
+    scope: process.env.POSTMOTTAK_SCOPE || '',
+    url: "http://postmottak",
+  },
 ]
 export const proxyOptions = (application: ProxyConfig) =>
   ({

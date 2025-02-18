@@ -1,2 +1,7 @@
 ingresses:
   - "https://kelvin.ansatt.dev.nav.no"
+env:
+  - OPPGAVESTYRING_FRONTEND_SCOPE: api://dev-gcp.aap.oppgavestyring-frontend/.default
+  - POSTMOTTAK_SCOPE: api://dev-gcp.aap.postmottak/.default
+  - PRODUKSJONSSTYRING_SCOPE: api://dev-gcp.aap.produksjonsstyring/.default
+  - SAKSBEHANDLNIG_SCOPE: api://dev-gcp.aap.saksbehandling/.default
