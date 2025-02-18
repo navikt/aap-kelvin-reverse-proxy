@@ -1,6 +1,9 @@
 ingresses:
   - "https://kelvin.ansatt.nav.no"
 env:
-  - POSTMOTTAK_SCOPE: api://prod-gcp.aap.postmottak/.default
-  - PRODUKSJONSSTYRING_SCOPE: api://prod-gcp.aap.produksjonsstyring/.default
-  - SAKSBEHANDLNIG_SCOPE: api://prod-gcp.aap.saksbehandling/.default
+  - name: POSTMOTTAK_SCOPE
+    value: api://prod-gcp.aap.postmottak/.default
+  - name: PRODUKSJONSSTYRING_SCOPE
+    value: api://prod-gcp.aap.produksjonsstyring/.default
+  - name: SAKSBEHANDLNIG_SCOPE
+    value: api://prod-gcp.aap.saksbehandling/.default
