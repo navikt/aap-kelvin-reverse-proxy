@@ -22,8 +22,7 @@ const apper: ProxyConfig[] = [
   {
     path: "/oppgave",
     scope: process.env.PRODUKKSJONSSTYRING_SCOPE || '',
-    // url: "http://produksjonsstyring",
-    url: "http://localhost:3000",
+    url: "http://produksjonsstyring",
   },
   {
     path: "/saksbehandling",
