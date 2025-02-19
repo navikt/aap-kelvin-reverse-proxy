@@ -7,7 +7,7 @@ export async function validateTokenOrRedirectToLogin(
   res: Response,
   next: NextFunction,
 ): Promise<void> {
-  if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'localhost') {
+  if (process.env.NODE_ENV === 'localhost') {
     console.log('Running locally, skipping authentication');
     next();
     return;

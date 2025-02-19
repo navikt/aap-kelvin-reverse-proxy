@@ -2,7 +2,7 @@
   "name": "aap-kelvin-reverse-proxy",
   "main": "dist/index.js",
   "scripts": {
-    "start": "NODE_ENV=production node dist/index.js",
+    "dev": "NODE_ENV=localhost PORT=9000 node dist/index.js",
     "build": "tsc -p tsconfig.json",
     "test": "vitest --run",
     "postinstall": "husky"

@@ -22,7 +22,8 @@ const apper: ProxyConfig[] = [
   {
     path: "/oppgave",
     scope: process.env.PRODUKKSJONSSTYRING_SCOPE || '',
-    url: "http://produksjonsstyring",
+    // url: "http://produksjonsstyring",
+    url: "http://localhost:3000",
   },
   {
     path: "/saksbehandling",
@@ -49,6 +50,11 @@ export const proxyOptions = (application: ProxyConfig) =>
       delete options.headers.cookie;
 
       return new Promise((resolve, reject) => {
+        if (process.env.NODE_ENV === 'localhost') {
+          console.log('Running locally, skipping authentication');
+          resolve(options);
+          return;
+        }
         // Vi har allerede validert token før vi kommer hit. Så dette burde aldri inntreffe
         const token = getToken(req);
         if (!token) {
