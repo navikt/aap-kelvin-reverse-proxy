@@ -1,8 +1,8 @@
 import url from "node:url";
 import { Router } from "express";
-import {getToken, requestAzureOboToken} from "@navikt/oasis";
-import proxy, {ProxyOptions} from 'express-http-proxy'
-import {logInfo, logWarning} from "../logger/logger";
+import { getToken, requestAzureOboToken } from "@navikt/oasis";
+import proxy, { ProxyOptions } from "express-http-proxy";
+import { logInfo, logWarning } from "../logger/logger";
 
 const xTimestamp = "x-Timestamp";
 const stripTrailingSlash = (str: string) =>
@@ -15,26 +15,25 @@ export interface ProxyConfig {
 const apper: ProxyConfig[] = [
   {
     path: "/oppgavestyring-frontend",
-    scope: process.env.OPPGAVESTYRING_FRONTEND_SCOPE || '',
+    scope: process.env.OPPGAVESTYRING_FRONTEND_SCOPE || "",
     url: "http://oppgavestyring-frontend",
-
   },
   {
     path: "/oppgave",
-    scope: process.env.PRODUKKSJONSSTYRING_SCOPE || '',
+    scope: process.env.PRODUKKSJONSSTYRING_SCOPE || "",
     url: "http://produksjonsstyring",
   },
   {
     path: "/saksbehandling",
-    scope: process.env.SAKSBEHANDLING_SCOPE || '',
+    scope: process.env.SAKSBEHANDLING_SCOPE || "",
     url: "http://saksbehandling",
   },
   {
     path: "/postmottak",
-    scope: process.env.POSTMOTTAK_SCOPE || '',
+    scope: process.env.POSTMOTTAK_SCOPE || "",
     url: "http://postmottak",
   },
-]
+];
 export const proxyOptions = (application: ProxyConfig) =>
   ({
     parseReqBody: false,
@@ -49,8 +48,8 @@ export const proxyOptions = (application: ProxyConfig) =>
       delete options.headers.cookie;
 
       return new Promise((resolve, reject) => {
-        if (process.env.NODE_ENV === 'localhost') {
-          console.log('Running locally, skipping authentication');
+        if (process.env.NODE_ENV === "localhost") {
+          console.log("Running locally, skipping authentication");
           resolve(options);
           return;
         }
@@ -58,16 +57,14 @@ export const proxyOptions = (application: ProxyConfig) =>
         const token = getToken(req);
         if (!token) {
           logWarning(
-            "Fant ikke Wonderwall token ved OBO-utveksling. Dette burde ikke inntreffe",
+            "Fant ikke Wonderwall token ved OBO-utveksling. Dette burde ikke inntreffe"
           );
           reject(new Error("Intet Wonderwall token"));
         }
         if (token) {
           requestAzureOboToken(token, application.scope).then((obo) => {
             if (obo.ok) {
-              logInfo(
-                `Token veksling tok: (${Date.now() - requestTime}ms)`,
-              );
+              logInfo(`Token veksling tok: (${Date.now() - requestTime}ms)`);
               // I tilfelle headers er undefined.
               options.headers = options.headers ?? {};
               options.headers.Authorization = `Bearer ${obo.token}`;
@@ -95,11 +92,17 @@ export const proxyOptions = (application: ProxyConfig) =>
         (queryString ? `?${queryString}` : "");
 
       logInfo(
-        `Proxying request from '${req.originalUrl}' to '${stripTrailingSlash(urlFromApi.href)}${newPath}'`,
+        `Proxying request from '${req.originalUrl}' to '${stripTrailingSlash(urlFromApi.href)}${newPath}'`
       );
       return newPath;
     },
-    userResHeaderDecorator: (headers, userReq, _userRes, proxyReq, proxyRes) => {
+    userResHeaderDecorator: (
+      headers,
+      userReq,
+      _userRes,
+      proxyReq,
+      proxyRes
+    ) => {
       // FPSAK og TILBAKE sender er redirect med full hostname - dette må man modifisere slik at det går tilbake via proxy.
       const location = proxyRes.headers.location;
       if (location?.includes(application.url)) {
@@ -149,7 +152,7 @@ export const setupProxies = (router: Router) => {
           next();
         }
       },
-      proxy(application.url, proxyOptions(application)),
+      proxy(application.url, proxyOptions(application))
     );
   }
 };

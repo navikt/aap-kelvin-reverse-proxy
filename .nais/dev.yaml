@@ -7,5 +7,5 @@ env:
     value: api://dev-gcp.aap.postmottak/.default
   - name: PRODUKSJONSSTYRING_SCOPE
     value: api://dev-gcp.aap.produksjonsstyring/.default
-  - name: SAKSBEHANDLNIG_SCOPE
+  - name: SAKSBEHANDLING_SCOPE
     value: api://dev-gcp.aap.saksbehandling/.default
