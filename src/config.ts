@@ -6,7 +6,7 @@ export interface ProxyConfig {
 export const config: ProxyConfig[] = [
   {
     path: "/oppgave",
-    scope: process.env.PRODUKKSJONSSTYRING_SCOPE || '',
+    scope: process.env.PRODUKSJONSSTYRING_SCOPE || '',
     url: "http://produksjonsstyring",
   },
   {

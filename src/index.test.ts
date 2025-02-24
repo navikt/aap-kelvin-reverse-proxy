@@ -5,10 +5,10 @@ import {proxyConfigWithTrailingSlash} from "./index";
 describe('index', () => {
   it('proxyConfigWithTrailingSlash', () => {
     const redirectUrlSaksbeh = proxyConfigWithTrailingSlash('/saksbehandling');
-    expect(redirectUrlSaksbeh).toBe('http://saksbehandling/saksbehandling/');
+    expect(redirectUrlSaksbeh).toBe('/saksbehandling/');
     const redirectUrlOppg = proxyConfigWithTrailingSlash('/oppgave');
-    expect(redirectUrlOppg).toBe('http://produksjonsstyring/oppgave/');
+    expect(redirectUrlOppg).toBe('/oppgave/');
     const redirectUrlPost = proxyConfigWithTrailingSlash('/postmottak');
-    expect(redirectUrlPost).toBe('http://postmottak/postmottak/');
+    expect(redirectUrlPost).toBe('/postmottak/');
   })
 })

@@ -39,5 +39,5 @@ app.listen(port, () => {
 
 export function proxyConfigWithTrailingSlash(url: string): string {
   const app = config.find((app: ProxyConfig) => url === app.path);
-  return app ? `${app.url}${url}/` : '';
+  return app ? `${url}/` : '';
 }
