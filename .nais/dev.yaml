@@ -1,5 +1,6 @@
 ingresses:
   - "https://kelvin.ansatt.dev.nav.no"
+  - "https://kelvin.intern.dev.nav.no"
 env:
   - name: OPPGAVESTYRING_FRONTEND_SCOPE
     value: api://dev-gcp.aap.oppgavestyring-frontend/.default
