@@ -18,6 +18,11 @@ app.use(validateTokenOrRedirectToLogin);
 
 setupProxies(app);
 
+// Kelvinsøk fra felles appheader
+app.use('/api/kelvinsok', (_req, res, _next) => {
+  return res.redirect('/saksbehandling/api/kelvinsok');
+});
+
 app.use('*', (req, res, next) => {
   // redirect til oppgavelisten fra rot
   if(req.originalUrl === '/') {
