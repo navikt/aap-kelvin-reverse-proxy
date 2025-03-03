@@ -19,8 +19,8 @@ app.use(validateTokenOrRedirectToLogin);
 setupProxies(app);
 
 // Kelvinsøk fra felles appheader
-app.use('/api/kelvinsok', (_req, res, _next) => {
-  return res.redirect('/saksbehandling/api/kelvinsok');
+app.post('/api/kelvinsok', (_req, res, _next) => {
+  return res.redirect(307, '/saksbehandling/api/kelvinsok');
 });
 
 app.use('*', (req, res, next) => {
