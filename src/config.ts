@@ -7,7 +7,7 @@ export const config: ProxyConfig[] = [
   {
     path: "/oppgave",
     scope: process.env.PRODUKSJONSSTYRING_SCOPE || '',
-    url: "http://produksjonsstyring",
+    url: "http://saksbehandling",
   },
   {
     path: "/saksbehandling",
@@ -17,6 +17,6 @@ export const config: ProxyConfig[] = [
   {
     path: "/postmottak",
     scope: process.env.POSTMOTTAK_SCOPE || '',
-    url: "http://postmottak",
+    url: "http://saksbehandling",
   },
 ]
