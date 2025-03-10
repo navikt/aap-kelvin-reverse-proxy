@@ -28,13 +28,6 @@ spec:
       memory: 512Mi
     limits:
       memory: 512Mi
-  azure:
-    application:
-      enabled: true
-      allowAllUsers: true
-    sidecar:
-      enabled: true
-      autoLogin: true
   observability:
     autoInstrumentation:
       enabled: true
@@ -44,8 +37,6 @@ spec:
     - name: {{this.name }}
       value: {{this.value}}
   {{/each}}
-  tokenx:
-    enabled: true
   accessPolicy:
     outbound:
       rules:
